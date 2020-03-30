@@ -1,6 +1,10 @@
 language: ruby
+cache: bundler
 rvm:
- - 2.6
+ - 2.5
 before_install:
   - sudo apt-get -y install libidn11-dev
+script:
+  - bundle exec rails db:migrate RAILS_ENV=test
+  - bundle exec rspec
 
