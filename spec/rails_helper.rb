@@ -28,12 +28,20 @@ require 'support/factory_bot'
 
 # Checks for pending migrations and applies them before tests are run.
 # If you are not using ActiveRecord, you can remove these lines.
+
+# See https://www.amrani.io/blog/testing-an-engine-with-rspec/
+# for why this is necessary. Otherwise rake will complain that migrations
+# have not been run.
+
+ENGINE_ROOT = File.join(File.dirname(__FILE__), '../')
 begin
+  ActiveRecord::Migrator.migrations_paths = File.join(ENGINE_ROOT, 'spec/dummy/db/migrate')
   ActiveRecord::Migration.maintain_test_schema!
 rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
+
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
