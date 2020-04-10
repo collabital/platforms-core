@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.name        = "platforms-core"
   spec.version     = Platforms::Core::VERSION
   spec.authors     = ["Benjamin Elias"]
-  spec.email       = ["ben@collabital.com"]
+  spec.email       = ["12136262+collabital@users.noreply.github.com"]
   spec.homepage    = "https://www.collabital.com"
   spec.summary     = "Login for various collaboration platforms."
   spec.description = "Login to Office 365 Teams, Yammer."

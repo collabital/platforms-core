@@ -19,6 +19,7 @@ module Platforms
     has_many :platforms_group_members,
       class_name: "Platforms::GroupMember",
       inverse_of: :platforms_user,
+      foreign_key: :platforms_user_id,
       dependent: :destroy
 
     # Name must exist for display

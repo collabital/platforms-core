@@ -54,5 +54,13 @@ module Platforms
       it { expect(subject).to respond_to(:platforms_group) }
       it { expect(subject).to respond_to(:platforms_user) }
     end
+
+    describe "relationships" do
+      before :each do
+        subject
+      end
+      it { expect(user.platforms_group_members.count).to eq 1 }
+      it { expect(group.platforms_group_members.count).to eq 1 }
+    end
   end
 end
