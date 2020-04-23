@@ -9,6 +9,7 @@ spec/dummy/db/*.sqlite3-*
 spec/dummy/log/*.log
 spec/dummy/storage/
 spec/dummy/tmp/
+spec/lib/generators/tmp/
 Gemfile.lock
 .rake_tasks~
 coverage/

@@ -1,7 +1,11 @@
+require "platforms/core/app_network"
+require "platforms/core/app_user"
 require "platforms/core/configuration"
 require "platforms/core/engine"
 require "platforms/core/omni_auth_setup"
 require "platforms/core/o_auth_2"
+
+require "generators/platforms/core/install/install_generator"
 
 # The top level namespace for Platforms, which includes Core and
 # other vendor-specific implementations.

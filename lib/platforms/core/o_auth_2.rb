@@ -3,7 +3,6 @@ module Platforms
 
     # This is a module for common authentication methods, across multiple
     # platforms.
-    # @todo extract out the common functionality.
     module OAuth2
       extend ActiveSupport::Concern
 
