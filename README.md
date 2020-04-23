@@ -65,7 +65,7 @@ Typically these would be called "Network" and "User", but here we have called th
 
 ### Adding to an Existing App
 
-If you already have `User` and `Network` models (which let's assume are called "Foo" and "Bar" respectively), you can add the relevant configuration by using the generator with the `--existing-model` flag:
+If you already have `Network` and `User` models (which let's assume are called "Foo" and "Bar" respectively), you can add the relevant configuration by using the generator with the `--existing-model` flag:
 
 ```bash
 $ rails generate platform:core:network foo --existing-model
