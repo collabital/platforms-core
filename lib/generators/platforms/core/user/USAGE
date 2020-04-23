@@ -1,0 +1,14 @@
+Description:
+    Create a User model, and include the relevant Platforms::Core Concern.
+    This will also set the relevant User configuration in
+    config/initializers/plaforms_core.rb.
+
+Example:
+    rails generate platforms:core:user blah more_info:string
+
+    This will create the Blah model, including migration, and test suite.
+    It will have a string column called "more_info".
+    The concern is then included in app/models/blah.rb
+
+    Also works for namespaced models, and accepts similar arguments
+    as the ActiveRecord generator (database columns, associations).

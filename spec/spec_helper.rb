@@ -20,16 +20,15 @@ SimpleCov.start do
   add_filter '/lib/platforms/core/engine.rb'
   add_filter '/vendor/'
 
-  add_group 'Controllers', 'app/controllers'
   add_group 'Models', 'app/models'
-  add_group 'Helpers', 'app/helpers'
-  add_group 'Views', 'app/views'
-  add_group 'Policies', 'app/policies'
-  add_group 'Platform', 'lib/platforms'
+  add_group 'Platforms', 'lib/platforms'
+  add_group 'Generators', 'lib/generators'
+  add_group 'Validators', 'app/validators'
 end
 
 # Require WebMock for replicating external services
 require 'webmock/rspec'
+require 'generator_spec'
 
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration

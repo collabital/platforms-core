@@ -1,0 +1,11 @@
+Description:
+    This will install the required migrations, and set up the initializer
+
+Example:
+    rails generate platforms:core:install
+
+    This will create:
+      The initializer in config/initializers/platforms_core.rb
+      Run $ rake patforms_core:install:migrations
+
+      Note that it will not run the migrations

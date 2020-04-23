@@ -32,55 +32,88 @@ Or install it yourself as:
 $ gem install platforms-core
 ```
 
-Once the gem is installed, from your Rails directory you will need to install the gem's migrations:
+Once the gem is installed, from your Rails directory you will can run the following generator to complete the installation:
 
 ```bash
-$ rake platforms_core:install:migrations
+$ rails generate platforms:core:install
 ```
+
+This will:
+
+* Copy a basic initializer to `config/initializers/platforms_core.rb`; and
+* Install the gem's migrations into your application.
 
 ## Configuration
 
 REST-based APIs require authentication to get started. Please refer to
 your platform for instructions on how to do this.
 
-The gem assumes that you have a class called `User` and a class called `Network` which might look something like the following:
+### Starting a New App
 
-```ruby
-class User < ApplicationRecord
+Your application needs to have at least `Network` and `User` models. These can be created by calling the generator:
 
-  # A User belongs to a Platforms::User
-  belongs_to :platforms_user,
-    class_name: "Platforms::User",
-    inverse_of: :app_user
-
-  # Ensure a User only maps to one Platforms::User
-  validates :platforms_user_id, uniqueness: true
-end
+```bash
+$ rails generate platform:core:network foo some_info:string
+$ rails generate platform:core:user bar user more_info:string
 ```
-and Network:
+
+Most of the options for the regular ActiveRecord model generator are available, including namespacing and indexing.
+
+This is roughly equivalent to calling the standard Rails model generators (`rails g model foo some_info:string`), however by using the above version the resulting models are configured by Platforms::Core as the `Network` or `User` models.
+
+Typically these would be called "Network" and "User", but here we have called them "Foo" and "Bar".
+
+### Adding to an Existing App
+
+If you already have `User` and `Network` models (which let's assume are called "Foo" and "Bar" respectively), you can add the relevant configuration by using the generator with the `--existing-model` flag:
+
+```bash
+$ rails generate platform:core:network foo --existing-model
+$ rails generate platform:core:user bar --existing-model
+```
+
+This will add the relevant concerns to the models, and update the initializer, without needing to create models from scratch.
+
+### Manual Configuration
+
+Finally, if you don't want to use the built-in generators then you can always create the models and configuration manually. The models should look something like this for a `Network`:
 
 ```ruby
+# app/models/network.rb
+
 class Network < ApplicationRecord
+  include Platforms::Core::AppNetwork
 
-  # A Network belongs to a Platforms::Network
-  belongs_to :platforms_network,
-    class_name: "Platforms::Network",
-    inverse_of: :app_network
+  # This requires an integer database column called
+  # 'platforms_network_id'
 
-  # Ensure a Network only maps to one Platforms::Network
-  validates :platforms_network_id, uniqueness: true
+  # ...
 end
 ```
 
-If you need the User and Network classes to be named differently,
-use configurations:
+and for a `User`:
+
+```ruby
+# app/models/user.rb
+
+class User < ApplicationRecord
+  include Platforms::Core::AppUser
+
+  # This requires an integer database column called
+  # 'platforms_user_id'
+
+  # ...
+end
+```
+
+Additionally, you will need to create an initializer which configures the `Network` and `User` classes for the gem:
 
 ```ruby
 # config/initializers/platforms.rb
 
 Platforms::Core.configure do |config|
-  config.network_class = "SampleNetwork"
-  config.user_class    = "SampleUser"
+  config.network_class = "Foo"
+  config.user_class    = "Bar"
 end
 ```
 

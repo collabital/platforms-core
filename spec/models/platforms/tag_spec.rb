@@ -1,5 +1,5 @@
 require 'rails_helper'
-require 'support/models/timestamps.rb'
+require 'support/examples/timestamps.rb'
 
 module Platforms
   RSpec.describe Tag, type: :model do

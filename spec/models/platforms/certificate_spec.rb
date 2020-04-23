@@ -1,6 +1,6 @@
 require 'rails_helper'
-require 'support/models/timestamps.rb'
-require 'support/models/products.rb'
+require 'support/examples/timestamps.rb'
+require 'support/examples/products.rb'
 
 module Platforms
   RSpec.describe Certificate, type: :model do
