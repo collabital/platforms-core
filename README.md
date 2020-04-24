@@ -118,7 +118,7 @@ end
 Additionally, you will need to create an initializer which configures the `Network` and `User` classes for the gem:
 
 ```ruby
-# config/initializers/platforms.rb
+# config/initializers/platforms_core.rb
 
 Platforms::Core.configure do |config|
   config.network_class = "Foo"
