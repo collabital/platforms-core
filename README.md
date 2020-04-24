@@ -1,12 +1,12 @@
 # Platforms::Core
+
 This is a Ruby library which brings together open source and (at least
 initially) Microsoft platforms. There are various gems out there to
 do OAuth2 authentication, REST calls, and so on. However, this brings
 everything together in one easy-to-use package.
 
 The goal is to create a minimal representation of the external data service in order to build fuller integrations.
-There is no particular integration in mind, so Platforms::Core should be as generic as possible to enable
-different platforms together.
+There is no particular integration in mind, so Platforms::Core should be as generic as possible to enable a variety of different integration types.
 
 ## Usage
 
@@ -14,6 +14,7 @@ The Core gem is typically not used on its own. Instead use it in conjunction wit
 libraries. Those should require Platforms::Core themselves.
 
 ## Installation
+
 Add this line to your application's Gemfile:
 
 ```ruby
@@ -32,7 +33,7 @@ Or install it yourself as:
 $ gem install platforms-core
 ```
 
-Once the gem is installed, from your Rails directory you will can run the following generator to complete the installation:
+Once the gem is installed, from your Rails directory you can run the following generator to complete the installation:
 
 ```bash
 $ rails generate platforms:core:install
@@ -40,8 +41,8 @@ $ rails generate platforms:core:install
 
 This will:
 
-* Copy a basic initializer to `config/initializers/platforms_core.rb`; and
-* Install the gem's migrations into your application.
+* Add a basic initializer to `config/initializers/platforms_core.rb`; and
+* Copy the gem's migrations into your application.
 
 ## Configuration
 
@@ -55,24 +56,32 @@ Your application needs to have at least `Network` and `User` models. These can b
 ```bash
 $ rails generate platform:core:network foo some_info:string
 $ rails generate platform:core:user bar user more_info:string
+$ rake db:migrate
 ```
 
-Most of the options for the regular ActiveRecord model generator are available, including namespacing and indexing.
+Most of the options for the regular [ActiveRecord model generator](https://guides.rubyonrails.org/active_record_migrations.html#model-generators) are available, including namespacing and indexing for columns.
 
-This is roughly equivalent to calling the standard Rails model generators (`rails g model foo some_info:string`), however by using the above version the resulting models are configured by Platforms::Core as the `Network` or `User` models.
+The above commands are roughly equivalent to calling the regular ActiveRecord model generators (`rails g model foo some_info:string`), but also configure the models in Platforms::Core as the `Network` or `User` models.
 
-Typically these would be called "Network" and "User", but here we have called them "Foo" and "Bar".
+Typically these would actually be called "Network" and "User", but here we have called them "Foo" and "Bar".
 
 ### Adding to an Existing App
 
-If you already have `Network` and `User` models (which let's assume are called "Foo" and "Bar" respectively), you can add the relevant configuration by using the generator with the `--existing-model` flag:
+If you already have `Network` and `User` models (which let's assume are called "Foo" and "Bar" respectively), you can configure them for Platforms::Core by using the generator with the `--existing-model` flag:
 
 ```bash
 $ rails generate platform:core:network foo --existing-model
 $ rails generate platform:core:user bar --existing-model
+$ rake db:migrate
 ```
 
-This will add the relevant concerns to the models, and update the initializer, without needing to create models from scratch.
+This will skip the model creation, but will still:
+
+* Create migrations for the Foo and Bar models;
+* Add the relevant concerns to each models; and
+* Update the `platforms_core` initializer.
+
+Again, this accepts the standard naming convention for Rails files, so use `admin/my_foo` if you model is Admin::MyFoo.
 
 ### Manual Configuration
 
@@ -84,7 +93,7 @@ Finally, if you don't want to use the built-in generators then you can always cr
 class Network < ApplicationRecord
   include Platforms::Core::AppNetwork
 
-  # This requires an integer database column called
+  # This module expects an integer database column called
   # 'platforms_network_id'
 
   # ...
@@ -99,7 +108,7 @@ and for a `User`:
 class User < ApplicationRecord
   include Platforms::Core::AppUser
 
-  # This requires an integer database column called
+  # This module expects an integer database column called
   # 'platforms_user_id'
 
   # ...
@@ -129,7 +138,6 @@ If not everything is documented, check this with:
 ```bash
 $ yard stats --list-undoc
 ```
-
 
 ## Contributing
 
