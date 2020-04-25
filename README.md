@@ -54,8 +54,8 @@ your platform for instructions on how to do this.
 Your application needs to have at least `Network` and `User` models. These can be created by calling the generator:
 
 ```bash
-$ rails generate platform:core:network foo some_info:string
-$ rails generate platform:core:user bar user more_info:string
+$ rails generate platforms:core:network foo some_info:string
+$ rails generate platforms:core:user bar user more_info:string
 $ rake db:migrate
 ```
 
@@ -70,8 +70,8 @@ Typically these would actually be called "Network" and "User", but here we have 
 If you already have `Network` and `User` models (which let's assume are called "Foo" and "Bar" respectively), you can configure them for Platforms::Core by using the generator with the `--existing-model` flag:
 
 ```bash
-$ rails generate platform:core:network foo --existing-model
-$ rails generate platform:core:user bar --existing-model
+$ rails generate platforms:core:network foo --existing-model
+$ rails generate platforms:core:user bar --existing-model
 $ rake db:migrate
 ```
 
